@@ -14,6 +14,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
+  "files": ["dist/*"],
   "keywords": [
     "primevue",
     "vue",
