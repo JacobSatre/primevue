@@ -14,11 +14,11 @@
                                 </button>
                                 <div class="p-datepicker-title">
                                     <span class="p-datepicker-month" v-if="!monthNavigator && (view !== 'month')">{{getMonthName(month.month)}}</span>
-                                    <select class="p-datepicker-month" v-if="monthNavigator && (view !== 'month') && numberOfMonths === 1" @change="onMonthDropdownChange($event.target.value)">
+                                    <select class="p-datepicker-month" v-if="monthNavigator && (view !== 'month') && numberOfMonths === 1" @change="onMonthDropdownChange($event.composedPath()[0].value)">
                                         <option :value="index" v-for="(monthName, index) of monthNames" :key="monthName" :selected="index === month.month">{{monthName}}</option>
                                     </select>
                                     <span class="p-datepicker-year" v-if="!yearNavigator">{{view === 'month' ? currentYear : month.year}}</span>
-                                    <select class="p-datepicker-year" v-if="yearNavigator && numberOfMonths === 1" @change="onYearDropdownChange($event.target.value)">
+                                    <select class="p-datepicker-year" v-if="yearNavigator && numberOfMonths === 1" @change="onYearDropdownChange($event.composedPath()[0].value)">
                                         <option :value="year" v-for="year of yearOptions" :key="year" :selected="year === currentYear">{{year}}</option>
                                     </select>
                                 </div>
@@ -670,12 +670,12 @@ export default {
             }
         },
         isOutsideClicked(event) {
-            return !(this.$el.isSameNode(event.target) || this.isNavIconClicked(event) ||
-                    this.$el.contains(event.target) || (this.$refs.overlay && this.$refs.overlay.contains(event.target)));
+            return !(this.$el.isSameNode(event.composedPath()[0]) || this.isNavIconClicked(event) ||
+                    this.$el.contains(event.composedPath()[0]) || (this.$refs.overlay && this.$refs.overlay.contains(event.composedPath()[0])));
         },
         isNavIconClicked(event) {
-            return (DomHandler.hasClass(event.target, 'p-datepicker-prev') || DomHandler.hasClass(event.target, 'p-datepicker-prev-icon')
-                    || DomHandler.hasClass(event.target, 'p-datepicker-next') || DomHandler.hasClass(event.target, 'p-datepicker-next-icon'));
+            return (DomHandler.hasClass(event.composedPath()[0], 'p-datepicker-prev') || DomHandler.hasClass(event.composedPath()[0], 'p-datepicker-prev-icon')
+                    || DomHandler.hasClass(event.composedPath()[0], 'p-datepicker-next') || DomHandler.hasClass(event.composedPath()[0], 'p-datepicker-next-icon'));
         },
         alignOverlay() {
             if (this.touchUI) {

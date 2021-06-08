@@ -223,7 +223,7 @@ export default {
                 return null;
         },
         onFilterChange(event) {
-            this.$emit('filter', {originalEvent: event, value: event.target.value});
+            this.$emit('filter', {originalEvent: event, value: event.composedPath()[0].value});
         }
     },
     computed: {

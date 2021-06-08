@@ -144,7 +144,7 @@ export default {
 
             this.messages = [];
             this.files = this.files || [];
-            let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+            let files = event.dataTransfer ? event.dataTransfer.files : event.composedPath()[0].files;
             for (let file of files) {
                 if (!this.isFileSelected(file)) {
                     if (this.validate(file)) {
@@ -305,7 +305,7 @@ export default {
                 event.stopPropagation();
                 event.preventDefault();
 
-                const files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+                const files = event.dataTransfer ? event.dataTransfer.files : event.composedPath()[0].files;
                 const allowDrop = this.multiple || (files && files.length === 1);
 
                 if (allowDrop) {

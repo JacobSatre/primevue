@@ -201,7 +201,7 @@ export default {
             }
         },
         isOutsideTopbarMenuClicked(event) {
-            return !(this.$refs.topbarMenu.isSameNode(event.target) || this.$refs.topbarMenu.contains(event.target));
+            return !(this.$refs.topbarMenu.isSameNode(event.composedPath()[0]) || this.$refs.topbarMenu.contains(event.composedPath()[0]));
         }
     }
 }

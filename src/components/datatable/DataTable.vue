@@ -475,7 +475,7 @@ export default {
             const column = e.column;
 
             if (column.sortable) {
-                const targetNode = event.target;
+                const targetNode = event.composedPath()[0];
                 const columnField = column.sortField || column.field;
 
                 if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
@@ -639,7 +639,7 @@ export default {
         },
         onRowClick(e) {
             const event = e.originalEvent;
-            if (DomHandler.isClickable(event.target)) {
+            if (DomHandler.isClickable(event.composedPath()[0])) {
                 return;
             }
 
@@ -720,7 +720,7 @@ export default {
         },
         onRowRightClick(event) {
             DomHandler.clearSelection();
-            event.originalEvent.target.focus();
+            event.originalevent.composedPath()[0].focus();
 
             this.$emit('update:contextMenuSelection', event.data);
             this.$emit('row-contextmenu', event);
@@ -734,7 +734,7 @@ export default {
             const rowIndex = e.index;
 
             if (this.selectionMode) {
-                const row = event.target;
+                const row = event.composedPath()[0];
 
                 switch (event.which) {
                     //down arrow
@@ -1017,7 +1017,7 @@ export default {
         },
         onColumnResizeStart(event) {
             let containerLeft = DomHandler.getOffset(this.$el).left;
-            this.resizeColumnElement = event.target.parentElement;
+            this.resizeColumnElement = event.composedPath()[0].parentElement;
             this.columnResizing = true;
             this.lastResizeHelperX = (event.pageX - containerLeft + this.$el.scrollLeft);
 
@@ -1142,7 +1142,7 @@ export default {
             const column = e.column;
 
             if (this.reorderableColumns && column.reorderableColumn) {
-                if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA' || DomHandler.hasClass(event.target, 'p-column-resizer'))
+                if (event.composedPath()[0].nodeName === 'INPUT' || event.composedPath()[0].nodeName === 'TEXTAREA' || DomHandler.hasClass(event.composedPath()[0], 'p-column-resizer'))
                     event.currentTarget.draggable = false;
                 else
                     event.currentTarget.draggable = true;
@@ -1157,11 +1157,11 @@ export default {
             this.colReorderIconWidth = DomHandler.getHiddenElementOuterWidth(this.$refs.reorderIndicatorUp);
             this.colReorderIconHeight = DomHandler.getHiddenElementOuterHeight(this.$refs.reorderIndicatorUp);
 
-            this.draggedColumn = this.findParentHeader(event.target);
+            this.draggedColumn = this.findParentHeader(event.composedPath()[0]);
             event.dataTransfer.setData('text', 'b'); // Firefox requires this to make dragging possible
         },
         onColumnHeaderDragOver(event) {
-            let dropHeader = this.findParentHeader(event.target);
+            let dropHeader = this.findParentHeader(event.composedPath()[0]);
             if(this.reorderableColumns && this.draggedColumn && dropHeader) {
                 event.preventDefault();
                 let containerOffset = DomHandler.getOffset(this.$el);
@@ -1201,7 +1201,7 @@ export default {
             event.preventDefault();
             if (this.draggedColumn) {
                 let dragIndex = DomHandler.index(this.draggedColumn);
-                let dropIndex = DomHandler.index(this.findParentHeader(event.target));
+                let dropIndex = DomHandler.index(this.findParentHeader(event.composedPath()[0]));
                 let allowDrop = (dragIndex !== dropIndex);
                 if (allowDrop && ((dropIndex - dragIndex === 1 && this.dropPosition === -1) || (dragIndex - dropIndex === 1 && this.dropPosition === 1))) {
                     allowDrop = false;
@@ -1295,7 +1295,7 @@ export default {
             }
         },
         onRowMouseDown(event) {
-            if (DomHandler.hasClass(event.target, 'p-datatable-reorderablerow-handle'))
+            if (DomHandler.hasClass(event.composedPath()[0], 'p-datatable-reorderablerow-handle'))
                 event.currentTarget.draggable = true;
             else
                 event.currentTarget.draggable = false;

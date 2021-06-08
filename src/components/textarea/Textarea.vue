@@ -43,7 +43,7 @@ export default {
                         this.resize();
                     }
 
-                    this.$emit('input', event.target.value);
+                    this.$emit('input', event.composedPath()[0].value);
                 }
             };
         },

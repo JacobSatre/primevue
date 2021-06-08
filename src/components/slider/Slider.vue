@@ -152,7 +152,7 @@ export default {
                 return;
             }
 
-            if (!DomHandler.hasClass(event.target, 'p-slider-handle')) {
+            if (!DomHandler.hasClass(event.composedPath()[0], 'p-slider-handle')) {
                 this.updateDomData();
                 this.setValue(event);
             }

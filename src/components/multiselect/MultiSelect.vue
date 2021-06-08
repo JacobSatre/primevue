@@ -172,7 +172,7 @@ export default {
             this.headerCheckboxFocused = false;
         },
         onClick() {
-            if (!this.disabled && (!this.$refs.overlay || !this.$refs.overlay.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-multiselect-close')) {
+            if (!this.disabled && (!this.$refs.overlay || !this.$refs.overlay.contains(event.composedPath()[0])) && !DomHandler.hasClass(event.composedPath()[0], 'p-multiselect-close')) {
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -236,7 +236,7 @@ export default {
             this.$emit('change', {originalEvent: event, value: value});
         },
         onOptionKeyDown(event, option) {
-            let listItem = event.target;
+            let listItem = event.composedPath()[0];
 
             switch(event.which) {
                 //down
@@ -358,7 +358,7 @@ export default {
             }
         },
         isOutsideClicked(event) {
-            return !(this.$refs.container.isSameNode(event.target) || this.$refs.container.contains(event.target) || (this.$refs.overlay && this.$refs.overlay.contains(event.target)));
+            return !(this.$refs.container.isSameNode(event.composedPath()[0]) || this.$refs.container.contains(event.composedPath()[0]) || (this.$refs.overlay && this.$refs.overlay.contains(event.composedPath()[0])));
         },
         getLabelByValue(val) {
             let label = null;
@@ -399,7 +399,7 @@ export default {
             }
         },
         onFilterChange(event) {
-            this.$emit('filter', {originalEvent: event, value: event.target.value});
+            this.$emit('filter', {originalEvent: event, value: event.composedPath()[0].value});
             if (this.overlayVisible) {
                 this.alignOverlay();
             }

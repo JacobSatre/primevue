@@ -8,7 +8,7 @@
                 </slot>
             </li>
             <li class="p-chips-input-token">
-                <input ref="input" type="text" @focus="onFocus($event)" @blur="onBlur($event)" :placeholder="placeholder" @input="inputValue = $event.target.value"
+                <input ref="input" type="text" @focus="onFocus($event)" @blur="onBlur($event)" :placeholder="placeholder" @input="inputValue = $event.composedPath()[0].value"
                     @keydown="onKeyDown($event)" @paste="onPaste($event)" :disabled="$attrs.disabled || maxedOut" :aria-labelledby="ariaLabelledBy">
             </li>
         </ul>
@@ -64,12 +64,12 @@ export default {
         onBlur(event) {
             this.focused = false;
             if (this.addOnBlur) {
-                this.addItem(event, event.target.value, false);
+                this.addItem(event, event.composedPath()[0].value, false);
             }
             this.$emit('blur', event);
         },
         onKeyDown(event) {
-            const inputValue = event.target.value;
+            const inputValue = event.composedPath()[0].value;
 
             switch(event.which) {
                 //backspace

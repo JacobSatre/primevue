@@ -57,7 +57,7 @@ export default {
             this.visible = false;
         },
         closeDialog($event) {
-            if(DomHandler.hasClass($event.target, 'p-dialog-header-close') || DomHandler.hasClass($event.target, 'p-dialog-header-close-icon')) {
+            if(DomHandler.hasClass($event.composedPath()[0], 'p-dialog-header-close') || DomHandler.hasClass($event.composedPath()[0], 'p-dialog-header-close-icon')) {
                 ConfirmationEventBus.off('confirm');
                 ConfirmationEventBus.off('close');
                 this.visible = false;

@@ -188,7 +188,7 @@ export default {
             }
         },
         moveToPreviousCell(event) {
-            let currentCell = this.findCell(event.target);
+            let currentCell = this.findCell(event.composedPath()[0]);
             let targetCell = this.findPreviousEditableColumn(currentCell);
 
             if (targetCell) {
@@ -197,7 +197,7 @@ export default {
             }
         },
         moveToNextCell(event) {
-            let currentCell = this.findCell(event.target);
+            let currentCell = this.findCell(event.composedPath()[0]);
             let targetCell = this.findNextEditableColumn(currentCell);
 
             if (targetCell) {

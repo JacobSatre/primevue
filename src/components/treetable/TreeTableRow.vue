@@ -74,8 +74,8 @@ export default {
             this.$emit('node-toggle', this.node);
         },
         onClick(event) {
-            if (DomHandler.isClickable(event.target) ||
-                DomHandler.hasClass(event.target, 'p-treetable-toggler') || DomHandler.hasClass(event.target.parentElement, 'p-treetable-toggler')) {
+            if (DomHandler.isClickable(event.composedPath()[0]) ||
+                DomHandler.hasClass(event.composedPath()[0], 'p-treetable-toggler') || DomHandler.hasClass(event.composedPath()[0].parentElement, 'p-treetable-toggler')) {
                 return;
             }
 
@@ -91,7 +91,7 @@ export default {
             this.nodeTouched = true;
         },
         onKeyDown(event) {
-            if (event.target === this.$el) {
+            if (event.composedPath()[0] === this.$el) {
                 const rowElement = this.$el;
 
                 switch (event.which) {

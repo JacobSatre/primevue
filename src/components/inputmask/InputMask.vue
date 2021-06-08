@@ -334,7 +334,7 @@ export default {
                     else
                         $vm.handleInputChange(event);
 
-                    $vm.$emit('input', event.target.value);
+                    $vm.$emit('input', event.composedPath()[0].value);
                 },
                 focus: event => {
                     if ($vm.$attrs.readonly) {

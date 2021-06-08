@@ -169,7 +169,7 @@ export default {
         },
         onKeyUp(event) {
             if (this.feedback) {
-                let value = event.target.value;
+                let value = event.composedPath()[0].value;
                 let label = null;
                 let meter = null;
                 switch (this.testStrength(value)) {

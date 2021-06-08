@@ -247,7 +247,7 @@ export default {
         bindDocumentClickListener() {
             if (!this.documentClickListener) {
                 this.documentClickListener = (event) => {
-                    if (this.$el && !this.$el.contains(event.target)) {
+                    if (this.$el && !this.$el.contains(event.composedPath()[0])) {
                         this.activeItem = null;
                         this.unbindDocumentClickListener();
                     }

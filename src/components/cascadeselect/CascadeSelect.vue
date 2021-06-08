@@ -150,7 +150,7 @@ export default {
             if (this.disabled) {
                 return;
             }
-            if (!this.$refs.overlay || !this.$refs.overlay.contains(event.target)) {
+            if (!this.$refs.overlay || !this.$refs.overlay.contains(event.composedPath()[0])) {
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -186,7 +186,7 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.overlayVisible && this.$refs.overlay && !this.$el.contains(event.target) && !this.$refs.overlay.contains(event.target)) {
+                    if (this.overlayVisible && this.$refs.overlay && !this.$el.contains(event.composedPath()[0]) && !this.$refs.overlay.contains(event.composedPath()[0])) {
                         this.hide();
                     }
                 };

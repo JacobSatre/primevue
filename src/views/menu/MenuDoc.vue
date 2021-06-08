@@ -148,7 +148,7 @@ toggle(event) {
                             <tr>
                                 <td>show</td>
                                 <td>event: Browser event <br />
-                                    target: Optional target if event.target would not be used</td>
+                                    target: Optional target if event.composedPath()[0] would not be used</td>
                                 <td>Shows the overlay.</td>
                             </tr>
                             <tr>

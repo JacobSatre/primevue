@@ -280,10 +280,10 @@ export default {
                 return;
             }
 
-            if (DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
+            if (DomHandler.hasClass(event.composedPath()[0], 'p-dropdown-clear-icon') || event.composedPath()[0].tagName === 'INPUT') {
                 return;
             }
-            else if (!this.$refs.overlay || !this.$refs.overlay.contains(event.target)) {
+            else if (!this.$refs.overlay || !this.$refs.overlay.contains(event.composedPath()[0])) {
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -302,7 +302,7 @@ export default {
             }, 200);
         },
         onEditableInput(event) {
-            this.$emit('input', event.target.value);
+            this.$emit('input', event.composedPath()[0].value);
         },
         onOverlayEnter() {
             this.$refs.overlay.style.zIndex = String(DomHandler.generateZIndex());
@@ -339,7 +339,7 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.overlayVisible && this.$refs.overlay && !this.$refs.container.contains(event.target) && !this.$refs.overlay.contains(event.target)) {
+                    if (this.overlayVisible && this.$refs.overlay && !this.$refs.container.contains(event.composedPath()[0]) && !this.$refs.overlay.contains(event.composedPath()[0])) {
                         this.hide();
                     }
                 };
@@ -454,7 +454,7 @@ export default {
             }
         },
         onFilterChange(event) {
-            this.$emit('filter', {originalEvent: event, value: event.target.value});
+            this.$emit('filter', {originalEvent: event, value: event.composedPath()[0].value});
             if (this.overlayVisible) {
                 this.alignOverlay();
             }
