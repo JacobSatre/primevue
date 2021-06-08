@@ -147,7 +147,7 @@ export default {
             this.focused = false;
         },
         onClick(event) {
-            if (!this.disabled && (!this.overlay || !this.overlay.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-treeselect-close')) {
+            if (!this.disabled && (!this.overlay || !this.overlay.contains(event.composedPath()[0])) && !DomHandler.hasClass(event.composedPath()[0], 'p-treeselect-close')) {
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -286,7 +286,7 @@ export default {
             }
         },
         isOutsideClicked(event) {
-            return !(this.$el.isSameNode(event.target) || this.$el.contains(event.target) || (this.overlay && this.overlay.contains(event.target)));
+            return !(this.$el.isSameNode(event.composedPath()[0]) || this.$el.contains(event.composedPath()[0]) || (this.overlay && this.overlay.contains(event.composedPath()[0])));
         },
         overlayRef(el) {
             this.overlay = el;

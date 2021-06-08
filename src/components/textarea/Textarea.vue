@@ -39,7 +39,7 @@ export default {
                 this.resize();
             }
 
-            this.$emit('update:modelValue', event.target.value);
+            this.$emit('update:modelValue', event.composedPath()[0].value);
         }
     },
     computed: {

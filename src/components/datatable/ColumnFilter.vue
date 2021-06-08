@@ -255,7 +255,7 @@ export default {
             this.hide();
         },
         onRowMatchModeKeyDown(event) {
-            let item = event.target;
+            let item = event.composedPath()[0];
 
             switch(event.key) {
                 case 'ArrowDown':
@@ -384,7 +384,7 @@ export default {
             this.overlay = el;
         },
         isTargetClicked(event) {
-            return this.$refs.icon && (this.$refs.icon === event.target || this.$refs.icon.contains(event.target));
+            return this.$refs.icon && (this.$refs.icon === event.composedPath()[0] || this.$refs.icon.contains(event.composedPath()[0]));
         },
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {

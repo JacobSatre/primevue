@@ -230,16 +230,16 @@ export default {
             }
         },
         isOutsideClicked(event) {
-            return !this.overlay.contains(event.target) && !this.isInputClicked(event) && !this.isDropdownClicked(event);
+            return !this.overlay.contains(event.composedPath()[0]) && !this.isInputClicked(event) && !this.isDropdownClicked(event);
         },
         isInputClicked(event) {
             if (this.multiple)
-                return event.target === this.$refs.multiContainer || this.$refs.multiContainer.contains(event.target);
+                return event.composedPath()[0] === this.$refs.multiContainer || this.$refs.multiContainer.contains(event.composedPath()[0]);
             else
-                return event.target === this.$refs.input;
+                return event.composedPath()[0] === this.$refs.input;
         },
         isDropdownClicked(event) {
-            return this.$refs.dropdownButton ? (event.target === this.$refs.dropdownButton || this.$refs.dropdownButton.$el.contains(event.target)) : false;
+            return this.$refs.dropdownButton ? (event.composedPath()[0] === this.$refs.dropdownButton || this.$refs.dropdownButton.$el.contains(event.composedPath()[0])) : false;
         },
         unbindOutsideClickListener() {
             if (this.outsideClickListener) {
@@ -334,13 +334,13 @@ export default {
             }
         },
         onInput(event) {
-            this.inputTextValue = event.target.value;
+            this.inputTextValue = event.composedPath()[0].value;
 
             if (this.timeout) {
                 clearTimeout(this.timeout);
             }
 
-            let query = event.target.value;
+            let query = event.composedPath()[0].value;
             if (!this.multiple) {
                 this.$emit('update:modelValue', query);
             }
@@ -488,7 +488,7 @@ export default {
         onChange(event) {
             if (this.forceSelection) {
                 let valid = false;
-                let inputValue = event.target.value.trim();
+                let inputValue = event.composedPath()[0].value.trim();
 
                 if (this.suggestions)  {
                     for (let item of this.suggestions) {

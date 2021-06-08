@@ -370,15 +370,15 @@ export default {
             this.isSpecialChar = false;
         },
         onInputKeyDown(event) {
-            this.lastValue = event.target.value;
+            this.lastValue = event.composedPath()[0].value;
             if (event.shiftKey || event.altKey) {
                 this.isSpecialChar = true;
                 return;
             }
 
-            let selectionStart = event.target.selectionStart;
-            let selectionEnd = event.target.selectionEnd;
-            let inputValue = event.target.value;
+            let selectionStart = event.composedPath()[0].selectionStart;
+            let selectionEnd = event.composedPath()[0].selectionEnd;
+            let inputValue = event.composedPath()[0].value;
             let newValueStr = null;
 
             if (event.altKey) {
@@ -809,7 +809,7 @@ export default {
         onInputBlur(event) {
             this.focused = false;
 
-            let input = event.target;
+            let input = event.composedPath()[0];
             let newValue = this.validateValue(this.parseValue(input.value));
             input.value = this.formatValue(newValue);
             input.setAttribute('aria-valuenow', newValue);

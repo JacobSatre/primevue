@@ -168,7 +168,7 @@ export default {
                 return;
             }
 
-            if (!this.overlay || !this.overlay.contains(event.target)) {
+            if (!this.overlay || !this.overlay.contains(event.composedPath()[0])) {
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -208,7 +208,7 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.overlayVisible && this.overlay && !this.$el.contains(event.target) && !this.overlay.contains(event.target)) {
+                    if (this.overlayVisible && this.overlay && !this.$el.contains(event.composedPath()[0]) && !this.overlay.contains(event.composedPath()[0])) {
                         this.hide();
                     }
                 };

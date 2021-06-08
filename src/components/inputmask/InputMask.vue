@@ -35,7 +35,7 @@ export default {
             else
                 this.handleInputChange(event);
 
-            this.$emit('update:modelValue', event.target.value);
+            this.$emit('update:modelValue', event.composedPath()[0].value);
         },
         onFocus(event) {
             if (this.$attrs.readonly) {

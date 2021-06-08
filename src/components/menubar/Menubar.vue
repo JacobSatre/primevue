@@ -55,8 +55,8 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.mobileActive && this.$refs.rootmenu.$el !== event.target && !this.$refs.rootmenu.$el.contains(event.target)
-                        && this.$refs.menubutton !== event.target && !this.$refs.menubutton.contains(event.target)) {
+                    if (this.mobileActive && this.$refs.rootmenu.$el !== event.composedPath()[0] && !this.$refs.rootmenu.$el.contains(event.composedPath()[0])
+                        && this.$refs.menubutton !== event.composedPath()[0] && !this.$refs.menubutton.contains(event.composedPath()[0])) {
                         this.mobileActive = false;
                     }
                 };

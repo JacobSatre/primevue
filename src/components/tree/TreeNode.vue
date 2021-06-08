@@ -63,7 +63,7 @@ export default {
             this.$emit('node-toggle', node);
         },
         onClick(event) {
-            if (DomHandler.hasClass(event.target, 'p-tree-toggler') || DomHandler.hasClass(event.target.parentElement, 'p-tree-toggler')) {
+            if (DomHandler.hasClass(event.composedPath()[0], 'p-tree-toggler') || DomHandler.hasClass(event.composedPath()[0].parentElement, 'p-tree-toggler')) {
                 return;
             }
 
@@ -87,7 +87,7 @@ export default {
             this.nodeTouched = true;
         },
         onKeyDown(event) {
-            const nodeElement = event.target.parentElement;
+            const nodeElement = event.composedPath()[0].parentElement;
 
             switch (event.which) {
                 //down arrow

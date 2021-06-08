@@ -430,7 +430,7 @@ export default {
             }
         },
         isOutsideClicked(event) {
-            return !(this.$el.isSameNode(event.target) || this.$el.contains(event.target));
+            return !(this.$el.isSameNode(event.composedPath()[0]) || this.$el.contains(event.composedPath()[0]));
         },
         decrementScale() {
             this.scale--;

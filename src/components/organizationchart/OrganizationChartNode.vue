@@ -73,7 +73,7 @@ export default {
     },
     methods: {
         onNodeClick(event) {
-            if (DomHandler.hasClass(event.target, 'p-node-toggler') || DomHandler.hasClass(event.target, 'p-node-toggler-icon')) {
+            if (DomHandler.hasClass(event.composedPath()[0], 'p-node-toggler') || DomHandler.hasClass(event.composedPath()[0], 'p-node-toggler-icon')) {
                 return;
             }
 

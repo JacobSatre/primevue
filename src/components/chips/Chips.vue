@@ -55,7 +55,7 @@ export default {
             this.$refs.input.focus();
         },
         onInput(event) {
-            this.inputValue = event.target.value;
+            this.inputValue = event.composedPath()[0].value;
         },
         onFocus() {
             this.focused = true;
@@ -63,11 +63,11 @@ export default {
         onBlur(event) {
             this.focused = false;
             if (this.addOnBlur) {
-                this.addItem(event, event.target.value, false);
+                this.addItem(event, event.composedPath()[0].value, false);
             }
         },
         onKeyDown(event) {
-            const inputValue = event.target.value;
+            const inputValue = event.composedPath()[0].value;
 
             switch(event.which) {
                 //backspace
