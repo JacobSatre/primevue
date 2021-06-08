@@ -410,7 +410,7 @@ export default {
             let column = e.column;
 
             if (this.columnProp(column, 'sortable')) {
-                const targetNode = event.target;
+                const targetNode = event.composedPath()[0];
                 const columnField = this.columnProp(column, 'sortField') || this.columnProp(column, 'field');
 
                 if (DomHandler.hasClass(targetNode, 'p-sortable-column') || DomHandler.hasClass(targetNode, 'p-column-title')
@@ -652,7 +652,7 @@ export default {
         },
         onColumnResizeStart(event) {
             let containerLeft = DomHandler.getOffset(this.$el).left;
-            this.resizeColumnElement = event.target.parentElement;
+            this.resizeColumnElement = event.composedPath()[0].parentElement;
             this.columnResizing = true;
             this.lastResizeHelperX = (event.pageX - containerLeft + this.$el.scrollLeft);
 

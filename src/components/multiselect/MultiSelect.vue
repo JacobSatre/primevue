@@ -256,8 +256,8 @@ export default {
                 return;
             }
 
-            if ((!this.overlay || !this.overlay.contains(event.target)) && !DomHandler.hasClass(event.target, 'p-multiselect-close')) {
-                DomHandler.hasClass(event.target, 'p-multiselect-close');
+            if ((!this.overlay || !this.overlay.contains(event.composedPath()[0])) && !DomHandler.hasClass(event.composedPath()[0], 'p-multiselect-close')) {
+                DomHandler.hasClass(event.composedPath()[0], 'p-multiselect-close');
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -321,7 +321,7 @@ export default {
             this.$emit('change', {originalEvent: event, value: value});
         },
         onOptionKeyDown(event, option) {
-            let listItem = event.target;
+            let listItem = event.composedPath()[0];
 
             switch(event.which) {
                 //down
@@ -451,7 +451,7 @@ export default {
             }
         },
         isOutsideClicked(event) {
-            return !(this.$el.isSameNode(event.target) || this.$el.contains(event.target) || (this.overlay && this.overlay.contains(event.target)));
+            return !(this.$el.isSameNode(event.composedPath()[0]) || this.$el.contains(event.composedPath()[0]) || (this.overlay && this.overlay.contains(event.composedPath()[0])));
         },
         getLabelByValue(val) {
             let option;
@@ -502,7 +502,7 @@ export default {
             this.$emit('change', {originalEvent: event, value: value});
         },
         onFilterChange(event) {
-            this.$emit('filter', {originalEvent: event, value: event.target.value});
+            this.$emit('filter', {originalEvent: event, value: event.composedPath()[0].value});
             if (this.overlayVisible) {
                 this.alignOverlay();
             }

@@ -148,7 +148,7 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.visible && this.container && !this.container.contains(event.target) && !event.ctrlKey) {
+                    if (this.visible && this.container && !this.container.contains(event.composedPath()[0]) && !event.ctrlKey) {
                         this.hide();
                     }
                 };

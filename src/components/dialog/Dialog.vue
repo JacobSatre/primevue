@@ -167,7 +167,7 @@ export default {
             this.unbindGlobalListeners();
         },
         onMaskClick(event) {
-            if (this.dismissableMask && this.closable && this.modal && this.mask === event.target) {
+            if (this.dismissableMask && this.closable && this.modal && this.mask === event.composedPath()[0]) {
                 this.close();
             }
         },
@@ -283,7 +283,7 @@ export default {
             }
         },
         initDrag(event) {
-            if (DomHandler.hasClass(event.target, 'p-dialog-header-icon') || DomHandler.hasClass(event.target.parentElement, 'p-dialog-header-icon')) {
+            if (DomHandler.hasClass(event.composedPath()[0], 'p-dialog-header-icon') || DomHandler.hasClass(event.composedPath()[0].parentElement, 'p-dialog-header-icon')) {
                 return;
             }
 

@@ -211,7 +211,7 @@ export default {
             }
         },
         isTargetClicked(event) {
-            return this.target && (this.target === event.target || this.target.contains(event.target));
+            return this.target && (this.target === event.composedPath()[0] || this.target.contains(event.composedPath()[0]));
         },
         containerRef(el) {
             this.container = el;

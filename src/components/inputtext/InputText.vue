@@ -11,7 +11,7 @@ export default {
     },
     methods: {
         onInput(event) {
-            this.$emit('update:modelValue', event.target.value);
+            this.$emit('update:modelValue', event.composedPath()[0].value);
         }
     },
     computed: {

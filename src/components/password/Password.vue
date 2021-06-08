@@ -148,7 +148,7 @@ export default {
             return level;
         },
         onInput(event)  {
-             this.$emit('update:modelValue', event.target.value)
+             this.$emit('update:modelValue', event.composedPath()[0].value)
         },
         onFocus() {
             this.focused = true;
@@ -164,7 +164,7 @@ export default {
         },
         onKeyUp(event) {
             if (this.feedback) {
-                let value = event.target.value;
+                let value = event.composedPath()[0].value;
                 let label = null;
                 let meter = null;
 

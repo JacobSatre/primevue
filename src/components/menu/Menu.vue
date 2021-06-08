@@ -135,7 +135,7 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.overlayVisible && this.container && !this.container.contains(event.target) && !this.isTargetClicked(event)) {
+                    if (this.overlayVisible && this.container && !this.container.contains(event.composedPath()[0]) && !this.isTargetClicked(event)) {
                         this.hide();
                     }
                 };
@@ -181,7 +181,7 @@ export default {
             }
         },
         isTargetClicked() {
-            return this.target && (this.target === event.target || this.target.contains(event.target));
+            return this.target && (this.target === event.composedPath()[0] || this.target.contains(event.composedPath()[0]));
         },
         visible(item) {
             return (typeof item.visible === 'function' ? item.visible() : item.visible !== false);

@@ -379,10 +379,10 @@ export default {
                 return;
             }
 
-            if (DomHandler.hasClass(event.target, 'p-dropdown-clear-icon') || event.target.tagName === 'INPUT') {
+            if (DomHandler.hasClass(event.composedPath()[0], 'p-dropdown-clear-icon') || event.composedPath()[0].tagName === 'INPUT') {
                 return;
             }
-            else if (!this.overlay || !this.overlay.contains(event.target)) {
+            else if (!this.overlay || !this.overlay.contains(event.composedPath()[0])) {
                 if (this.overlayVisible)
                     this.hide();
                 else
@@ -401,7 +401,7 @@ export default {
             }, 200);
         },
         onEditableInput(event) {
-            this.$emit('update:modelValue', event.target.value);
+            this.$emit('update:modelValue', event.composedPath()[0].value);
         },
         onOverlayEnter(el) {
             ZIndexUtils.set('overlay', el, this.$primevue.config.zIndex.overlay);
@@ -444,7 +444,7 @@ export default {
         bindOutsideClickListener() {
             if (!this.outsideClickListener) {
                 this.outsideClickListener = (event) => {
-                    if (this.overlayVisible && this.overlay && !this.$el.contains(event.target) && !this.overlay.contains(event.target)) {
+                    if (this.overlayVisible && this.overlay && !this.$el.contains(event.composedPath()[0]) && !this.overlay.contains(event.composedPath()[0])) {
                         this.hide();
                     }
                 };
@@ -570,7 +570,7 @@ export default {
             return label.startsWith(this.searchValue.toLocaleLowerCase(this.filterLocale));
         },
         onFilterChange(event) {
-            this.$emit('filter', {originalEvent: event, value: event.target.value});
+            this.$emit('filter', {originalEvent: event, value: event.composedPath()[0].value});
             if (this.overlayVisible) {
                 this.alignOverlay();
             }
